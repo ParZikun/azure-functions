@@ -34,7 +34,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         cursor = conn.cursor()
 
         # Execute query
-        cursor.execute("SELECT * FROM listings WHERE is_listed")
+        cursor.execute("SELECT * FROM listings WHERE is_listed = TRUE AND cartel_category IN ('AUTOBUY', 'GOOD', 'OK') ORDER BY listed_at DESC LIMIT 50")
         
         # Fetch all rows and column names
         rows = cursor.fetchall()
