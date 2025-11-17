@@ -34,7 +34,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         cursor = conn.cursor()
 
         # Execute query
-        cursor.execute("SELECT * FROM listings WHERE is_listed = 1")
+        cursor.execute("SELECT * FROM listings WHERE is_listed")
         
         # Fetch all rows and column names
         rows = cursor.fetchall()
