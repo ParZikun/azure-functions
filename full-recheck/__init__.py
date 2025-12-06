@@ -13,7 +13,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     try:
         # We need to pass auth or ensure the API is protected if deployed publicly.
         # For now, assuming internal network or localhost.
-        response = requests.post(target_url, timeout=5) # fast timeout as it's just a trigger
+        # Timeout increased to 600s (10m) to allow for synchronous full sync.
+        # Azure Function HTTP timeout is technically 230s (Load Balancer), so this might catch it if local.
+        response = requests.post(target_url, timeout=600) 
         
         if response.status_code == 200:
             return func.HttpResponse(
